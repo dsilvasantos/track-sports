@@ -120,3 +120,10 @@ topics/
 │   ├── messages
 ```
 ---
+
+## 🤖 AI participation
+
+1. Autocomplete github copilot
+2. Unit test generation
+3. Api-mock generation
+
