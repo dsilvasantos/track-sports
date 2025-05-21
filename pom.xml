@@ -23,6 +23,7 @@
         <java.version>21</java.version>
     </properties>
 
+
     <dependencies>
         <!-- Spring Web for REST APIs -->
         <dependency>
@@ -55,6 +56,13 @@
             </exclusions>
         </dependency>
 
+
+        <!--- Feign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
         <!-- Document api -->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -64,6 +72,18 @@
 
 
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2023.0.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
