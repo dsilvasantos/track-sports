@@ -1,0 +1,11 @@
+spring:
+  kafka:
+    bootstrap-servers: kafka:29092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+tracker:
+  polling-interval: 10
+  external-url: http://host.docker.internal:8081/api/score
+  topic: live-events
