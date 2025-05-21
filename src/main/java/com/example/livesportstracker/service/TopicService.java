@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 public class TopicService {
     private static final Logger logger = LoggerFactory.getLogger(TopicService.class);
 
-    // Parâmetros de retry
+
     private static final int MAX_RETRIES = 3;
-    private static final long RETRY_DELAY_MS = 1000; // 1 segundo
+    private static final long RETRY_DELAY_MS = 1000;
 
     public  void safeSend(KafkaTemplate<String, String> kafkaTemplate, String topic, String message) {
         int attempt = 0;
         while (attempt < MAX_RETRIES) {
             try {
-                kafkaTemplate.send(topic, message).get(); // Usa .get() para capturar erro de forma síncrona
+                kafkaTemplate.send(topic, message).get();
                 logger.info("Message sent to Kafka topic {}: {}", topic, message);
-                return; // sucesso
+                return;
             } catch (Exception e) {
                 attempt++;
                 logger.warn("Attempt {} failed to send to Kafka topic {}: {}", attempt, topic, e.getMessage());
@@ -30,7 +30,7 @@ public class TopicService {
                     try {
                         Thread.sleep(RETRY_DELAY_MS);
                     } catch (InterruptedException ie) {
-                        Thread.currentThread().interrupt(); // restaura o estado interrompido
+                        Thread.currentThread().interrupt();
                         logger.error("Retry sleep interrupted while sending to Kafka topic {}", topic);
                         return;
                     }

@@ -18,9 +18,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class EventService {
     private static final Logger logger = LoggerFactory.getLogger(EventService.class);
 
-    @Autowired
-    private EventClient eventClient;
 
+    private final EventClient eventClient;
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final String topic;
     private final TopicService topicService;
@@ -28,10 +27,11 @@ public class EventService {
     private final Map<String, Boolean> liveEvents = new ConcurrentHashMap<>();
 
     public EventService(KafkaTemplate<String, String> kafkaTemplate,
-                        @Value("${tracker.topic}") String topic,TopicService topicService) {
+                        @Value("${tracker.topic}") String topic,TopicService topicService,EventClient eventClient) {
         this.kafkaTemplate = kafkaTemplate;
         this.topic = topic;
         this.topicService = topicService;
+        this.eventClient = eventClient;
     }
 
     public void updateEventStatus(EventStatusRequest request) {
